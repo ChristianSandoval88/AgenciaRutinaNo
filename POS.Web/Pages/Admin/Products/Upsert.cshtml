@@ -1,0 +1,220 @@
+﻿@page
+@model POS.Web.Pages.Admin.Products.UpsertModel
+@{
+    ViewData["Title"] = Model.Product.Id == 0 ? "Crear" : "Editar";
+    ViewData["Title"] += " Producto";
+    Layout = "~/Pages/Shared/AdminLTE/_Layout.cshtml";
+}
+<div class="card card-solid">
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="Product.Id" type="hidden" />
+    <input asp-for="Product.Image" type="hidden" />
+    <div class="card-body">
+        <div class="row">
+            <div class="col-9">
+                <div class="form-group">
+                    <label asp-for="Product.Name"></label>
+                    <input asp-for="Product.Name" class="form-control" />
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label asp-for="Product.PriceSell"></label>
+                            <input asp-for="Product.PriceSell" class="form-control" />
+                            <span asp-validation-for="Product.PriceSell" class="text-danger"></span>
+                        </div>
+                        <div class="col-9">
+                            <label asp-for="Product.PriceSellDesc"></label>
+                            <input asp-for="Product.PriceSellDesc" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label asp-for="Product.PriceSell2"></label>
+                            <input asp-for="Product.PriceSell2" class="form-control" />
+                        </div>
+                        <div class="col-9">
+                            <label asp-for="Product.PriceSell2Desc"></label>
+                            <input asp-for="Product.PriceSell2Desc" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label asp-for="Product.PriceSell3"></label>
+                            <input asp-for="Product.PriceSell3" class="form-control" />
+                        </div>
+                        <div class="col-9">
+                            <label asp-for="Product.PriceSell3Desc"></label>
+                            <input asp-for="Product.PriceSell3Desc" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label asp-for="Product.PriceSell4"></label>
+                            <input asp-for="Product.PriceSell4" class="form-control" />
+                        </div>
+                        <div class="col-9">
+                            <label asp-for="Product.PriceSell4Desc"></label>
+                            <input asp-for="Product.PriceSell4Desc" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.Image"></label>
+                    <div class="input-group">
+                    <input type="file" name="files" id="uploadBox" class="custom-file-input" accept="image/*" onchange="$('#uploadBoxLabel').text($('#uploadBox').val())"/>
+                    <label class="custom-file-label" for="uploadBox" id="uploadBoxLabel">Choose file</label>
+                    </div>
+                    <span id="ErrorInputFile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.CategoryId"></label>
+                    <select asp-for="Product.CategoryId" asp-items="Model.CategoryList" class="form-control">
+                        <option value="">Seleccionar</option>
+                    </select>
+                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.ShortDescription"></label>
+                    <textarea asp-for="Product.ShortDescription" oninput=""></textarea>
+                    <span asp-validation-for="Product.ShortDescription" class="text-danger"></span>
+                    <span id="Product_ShortDescription_Error" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.LongDescription"></label>
+                    <textarea asp-for="Product.LongDescription"></textarea>
+                    <span asp-validation-for="Product.LongDescription" class="text-danger"></span>
+                    <span id="Product_LongDescription_Error" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                              <input class="custom-control-input" type="checkbox" asp-for="Product.IsActive">
+                              <label class="custom-control-label" asp-for="Product.IsActive"></label>
+                    </div><div></div>
+                    <div class="custom-control custom-checkbox">
+                              <input class="custom-control-input" type="checkbox" asp-for="Product.IsCustomizable">
+                              <label class="custom-control-label" asp-for="Product.IsCustomizable"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <img src="@Model.Product.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        @if(Model.Product.Id==0)
+        {
+            <button type="submit" class="btn btn-primary float-right" onclick="return validateInsert()"><i class="fas fa-save"></i> &nbsp;Crear</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary float-right" onclick="return validateUpdate()"><i class="fas fa-save"></i> &nbsp;Actualizar</button>
+        }
+        <a href="Index" class="btn btn-secondary float-right mx-2"><i class="fas fa-window-close"></i>&nbsp;Cancelar</a>
+    </div>
+</form>
+</div>
+@section Scripts{
+<script src="https://cdn.tiny.cloud/1/g85qd870vf5ptljysgb5uhp1ql2nzpcf1mcael4bif1r2yzv/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+        tinymce.init({
+          selector: 'textarea',
+  plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+  mobile: {
+    plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+  },
+  menu: {
+    tc: {
+      title: 'Comments',
+      items: 'addcomment showcomments deleteallconversations'
+    }
+  },
+  menubar: 'file edit view insert format tools table tc help',
+  toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+  autosave_ask_before_unload: true,
+  autosave_interval: '1s',
+  autosave_prefix: '{path}{query}-{id}-',
+  autosave_restore_when_empty: false,
+  autosave_retention: '2m',
+  image_advtab: true,
+  link_list: [
+    { title: 'My page 1', value: 'https://www.tiny.cloud' },
+    { title: 'My page 2', value: 'http://www.moxiecode.com' }
+  ],
+  image_list: [
+    { title: 'My page 1', value: 'https://www.tiny.cloud' },
+    { title: 'My page 2', value: 'http://www.moxiecode.com' }
+  ],
+  image_class_list: [
+    { title: 'None', value: '' },
+    { title: 'Some class', value: 'class-name' }
+  ],
+  importcss_append: true,
+  templates: [
+        { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+    { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+    { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+  ],
+  template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+  template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+  height: 200,
+  image_caption: true,
+  quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+  noneditable_noneditable_class: 'mceNonEditable',
+  toolbar_mode: 'sliding',
+  spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+  tinycomments_mode: 'embedded',
+  content_style: '.mymention{ color: gray; }',
+  contextmenu: 'link image imagetools table configurepermanentpen',
+  language: 'es'
+        });
+
+    function validateInsert () {
+        $("#ErrorInputFile").text("");
+        $("#Product_ShortDescription_Error").text("");
+        $("#Product_LongDescription_Error").text("");
+        if($("#Product_Id").val()=="0" && $("#uploadBox").val()=="")
+        {
+            $("#ErrorInputFile").text("Debe seleccionar una imagen");
+            return false;
+        }
+        if(tinymce.get("Product_ShortDescription").getContent()=="")
+        {
+            $("#Product_ShortDescription_Error").text("Ingrese una descripción corta");
+            return false;
+        }
+        if(tinymce.get("Product_ShortDescription").getContent()=="")
+        {
+            $("#Product_LongDescription_Error").text("Ingrese una descripción larga");
+            return false;
+        }
+        return true;
+    }
+
+    function validateUpdate() {
+        $("#Product_ShortDescription_Error").text("");
+        $("#Product_LongDescription_Error").text("");
+        if(tinymce.get("Product_ShortDescription").getContent()=="")
+        {
+            $("#Product_ShortDescription_Error").text("Ingrese una descripción corta");
+            return false;
+        }
+        if(tinymce.get("Product_ShortDescription").getContent()=="")
+        {
+            $("#Product_LongDescription_Error").text("Ingrese una descripción larga");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,53 @@
+﻿@page
+@model POS.Web.Pages.Customer.Sales.IndexModel
+@{
+    Layout = "~/Pages/Shared/Front/_Layout.cshtml";
+}
+<partial name="Front/_Menu" />
+<partial name="Front/_Header" />
+<section class="section section-sm bg-default">
+    <div class="container">
+        <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Próximos viajes</span></h3>
+        <div class="row row-sm row-40 row-md-50">
+            <div class="col-sm-6 col-md-12 wow fadeInRight">
+                <!-- Product Big-->
+                @foreach (var product in Model.ProductList)
+                {
+                    <article class="product-big mt-4">
+                        <div class="unit flex-column flex-md-row align-items-md-stretch">
+                            <div class="unit-left"><img src="@product.Image" alt="" width="600" height="366" /></div>
+                            <div class="unit-body">
+                                <div class="product-big-body">
+                                    @if (product.IsActive)
+                                    {
+                                        <h5 class="product-big-title"><a href="#">@product.Name</a></h5>
+                                        <div class="group-sm group-middle justify-content-start">
+                                            <div class="product-big-rating"><span class="icon material-icons-stars"></span>&nbsp;<span class="product-big-reviews">@product.Category.Name</span>
+                                        </div></div>
+                                        <p class="product-big-text">@Html.Raw(product.ShortDescription)</p>
+                                        <a class="button button-md button-default-outline-2 button-ujarak" asp-page="Details" asp-route-id="@product.Id">Más detalles</a>
+                                        <div class="product-big-price-wrap">
+                                            @if (product.IsCustomizable)
+                                            {
+                                                <span class="product-big-price text-left" style="font-size:12px;">DESDE</span>
+                                            }
+                                            <span class="product-big-price" style="font-size:18px">@product.PriceSell.ToString("C")</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h5 class="product-big-title">@product.Name</h5>
+                                        <p class="product-big-text">@Html.Raw(product.ShortDescription)</p>
+                                        <div class="product-big-price-wrap2"><span class="product-big-price" style="font-size:18px">LLENO :(</span></div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<partial name="Front/_Nosotros" />
+<partial name="Front/_Footer" />

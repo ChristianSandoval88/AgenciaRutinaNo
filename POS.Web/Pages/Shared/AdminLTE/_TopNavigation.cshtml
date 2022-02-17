@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+<!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    &nbsp;&nbsp;<img src="~/Front/images/logo-rutinano.png" class="navbar-brand" width="150"/>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item mx-2">
+        <a asp-page="/Admin/Categories/Index" class="btn btn-default">Categorías</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a asp-page="/Admin/Products/Index" class="btn btn-default">Productos</a>
+        </li>
+        <li class="nav-item mx-3">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button id="logout" type="submit" class="btn btn-secondary">Salir</button>
+            </form>
+        </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+}

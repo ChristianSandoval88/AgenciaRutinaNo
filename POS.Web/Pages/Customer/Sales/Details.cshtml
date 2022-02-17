@@ -1,0 +1,76 @@
+﻿@page
+@model POS.Web.Pages.Customer.Sales.DetailsModel
+@{
+    Layout = "~/Pages/Shared/Front/_Layout.cshtml";
+}
+<partial name="Front/_Menu" />
+@if (Model.Product == null)
+{
+    <section class="section section-sm bg-default text-left">
+        <div class="container">
+            <h3>No se encontró la página solicitada</h3>
+            <a asp-page="Index" class="button button-md button-default-outline-2 button-ujarak">Regresar al inicio</a>
+        </div>
+    </section>
+}
+else
+{
+    <section class="section section-sm bg-default text-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <h3>@Model.Product.Name</h3>
+                    @Html.Raw(Model.Product.LongDescription)
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <p>@Model.Product.PriceSellDesc?.ToString()</p>
+                    <span class="button button-md button-default-outline-2 mt-0 mb-3 buttonactive text-white">@Model.Product.PriceSell.ToString("C")</span>
+                    @if (Model.Product.PriceSell2 != null && Model.Product.PriceSell2 > 0)
+                    {
+                        <p>@Model.Product.PriceSell2Desc?.ToString()</p>
+                        <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell2?.ToString("C")</span>
+                    }
+                    @if (Model.Product.PriceSell3 != null && Model.Product.PriceSell3 > 0)
+                    {
+                        <p>@Model.Product.PriceSell3Desc?.ToString()</p>
+                        <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell3?.ToString("C")</span>
+                    }
+                    @if (Model.Product.PriceSell4 != null && Model.Product.PriceSell4 > 0)
+                    {
+                        <p>@Model.Product.PriceSell4Desc?.ToString()</p>
+                        <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell4?.ToString("C")</span>
+                    }
+                    <h6 class="mt-4">Cantidad:</h6><input type="number" min="1" max="20" value="1" id="qty" class="form-control" />
+                    <br/>
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <span style="visibility:hidden" id="price">@Model.Product.PriceSell</span>
+}
+<partial name="Front/_Footer" />
+@section Scripts{
+<script src="https://www.paypal.com/sdk/js?client-id=AT9tkTGU_tJaO1-0I_MMocIX8hAb92BMGYGSHeo1fYIm3TC3CIUWawecbhNrZY2HhIXxGzIGKTqYkmHw&locale=es_MX&currency=MXN"></script>
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: document.getElementById("price").textContent.replace(',','').replace('$','')*document.getElementById("qty").value
+              },
+            }]
+          });
+        }
+      }).render('#paypal-button-container');
+
+      $(".button").click(function () {
+          $(".button").removeClass("buttonactive");
+          $(".button").removeClass("text-white");
+          $(this).addClass("buttonactive");
+          $(this).addClass("text-white");
+          $('#price').text($(this).text());
+      });
+</script>
+}
