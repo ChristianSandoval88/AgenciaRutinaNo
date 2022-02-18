@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Globalization
 @model POS.Web.Pages.Customer.Sales.IndexModel
 @{
     Layout = "~/Pages/Shared/Front/_Layout.cshtml";
@@ -31,7 +32,7 @@
                                             {
                                                 <span class="product-big-price text-left" style="font-size:12px;">DESDE</span>
                                             }
-                                            <span class="product-big-price" style="font-size:18px">@product.PriceSell.ToString("C")</span>
+                                            <span class="product-big-price" style="font-size:18px">@product.PriceSell.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
                                         </div>
                                     }
                                     else
