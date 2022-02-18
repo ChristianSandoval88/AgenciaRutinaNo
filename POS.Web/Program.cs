@@ -8,8 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+var serverVersion = new MariaDbServerVersion(new Version(10, 3, 25));
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDatabase")));
+        options.UseMySql(builder.Configuration.GetConnectionString("DefaultDatabase"), serverVersion));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDBContext>();
