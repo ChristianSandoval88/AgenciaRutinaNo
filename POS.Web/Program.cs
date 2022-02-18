@@ -11,6 +11,7 @@ builder.Services.AddRazorPages();
 var serverVersion = new MariaDbServerVersion(new Version(10, 3, 25));
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
         options.UseMySql(builder.Configuration.GetConnectionString("DefaultDatabase"), serverVersion));
+        //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDatabase")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDBContext>();
