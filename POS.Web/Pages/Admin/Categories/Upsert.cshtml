@@ -8,7 +8,6 @@
 <div class="card card-solid">
 <form method="post" enctype="multipart/form-data">
     <input asp-for="Category.Id" type="hidden" />
-    <input asp-for="Category.Image" type="hidden" />
     <div class="card-body">
         <div class="row">
             <div class="col-9">
@@ -22,26 +21,13 @@
                     <input asp-for="Category.DisplayOrder" class="form-control" value="1" />
                     <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Category.Image"></label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" name="files" id="uploadBox" class="custom-file-input" accept="image/*" onchange="$('#uploadBoxLabel').text($('#uploadBox').val())" />
-                            <label class="custom-file-label" for="uploadBox" id="uploadBoxLabel">Choose file</label>
-                        </div>
-                    </div>
-                    <span id="ErrorInputFile" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-3">
-                <img src="@Model.Category.Image"  width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
             </div>
         </div>
     </div>
     <div class="card-footer">
         @if (Model.Category.Id == 0)
         {
-            <button type="submit" class="btn btn-primary float-right" onclick="return validateInputFile()"><i class="fas fa-save"></i>&nbsp;Crear</button>
+            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i>&nbsp;Crear</button>
         }
         else
         {
@@ -53,14 +39,14 @@
 </div>
 @section Scripts{
 <script>
-    function validateInputFile () {
+    /*function validateInputFile () {
         if($("#Category_Id").val()=="0" && $("#uploadBox").val()=="")
         {
             $("#ErrorInputFile").text("Debe seleccionar una imagen");
             return false;
         }
         return true;
-    }
+    }*/
 </script>
 <partial name="_ValidationScriptsPartial" />
 }

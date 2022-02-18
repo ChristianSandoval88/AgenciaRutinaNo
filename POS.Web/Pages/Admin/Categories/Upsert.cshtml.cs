@@ -26,7 +26,7 @@ public class UpsertModel : PageModel
     }
     public IActionResult OnPost()
     {
-        Category.Image = getImageURL(Category.Image);
+        //Category.Image = getImageURL(Category.Image);
 
         if (Category.Id == 0)
             _unitOfWork.Category.Add(Category);

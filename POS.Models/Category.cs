@@ -11,7 +11,5 @@ namespace POS.Models
         [Display(Name = "Orden de listado")]
         [Range(1,100,ErrorMessage = "El orden del listado debe ser un número entero entre 1 y 100")]
         public int DisplayOrder { get; set; }
-        [Display(Name = "Imágen")]
-        public string Image { get; set; }
     }
 }

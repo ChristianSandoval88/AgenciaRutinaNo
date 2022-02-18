@@ -68,11 +68,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Product.Image"></label>
-                    <div class="input-group">
-                    <input type="file" name="files" id="uploadBox" class="custom-file-input" accept="image/*" onchange="$('#uploadBoxLabel').text($('#uploadBox').val())"/>
-                    <label class="custom-file-label" for="uploadBox" id="uploadBoxLabel">Choose file</label>
-                    </div>
-                    <span id="ErrorInputFile" class="text-danger"></span>
+                    <input asp-for="Product.Image" class="form-control" />
+                    <span asp-validation-for="Product.Image" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Product.CategoryId"></label>
@@ -112,11 +109,11 @@
     <div class="card-footer">
         @if(Model.Product.Id==0)
         {
-            <button type="submit" class="btn btn-primary float-right" onclick="return validateInsert()"><i class="fas fa-save"></i> &nbsp;Crear</button>
+            <button type="submit" class="btn btn-primary float-right" onclick="return validate()"><i class="fas fa-save"></i> &nbsp;Crear</button>
         }
         else
         {
-            <button type="submit" class="btn btn-primary float-right" onclick="return validateUpdate()"><i class="fas fa-save"></i> &nbsp;Actualizar</button>
+            <button type="submit" class="btn btn-primary float-right" onclick="return validate()"><i class="fas fa-save"></i> &nbsp;Actualizar</button>
         }
         <a href="Index" class="btn btn-secondary float-right mx-2"><i class="fas fa-window-close"></i>&nbsp;Cancelar</a>
     </div>
@@ -177,29 +174,7 @@
   language: 'es'
         });
 
-    function validateInsert () {
-        $("#ErrorInputFile").text("");
-        $("#Product_ShortDescription_Error").text("");
-        $("#Product_LongDescription_Error").text("");
-        if($("#Product_Id").val()=="0" && $("#uploadBox").val()=="")
-        {
-            $("#ErrorInputFile").text("Debe seleccionar una imagen");
-            return false;
-        }
-        if(tinymce.get("Product_ShortDescription").getContent()=="")
-        {
-            $("#Product_ShortDescription_Error").text("Ingrese una descripción corta");
-            return false;
-        }
-        if(tinymce.get("Product_ShortDescription").getContent()=="")
-        {
-            $("#Product_LongDescription_Error").text("Ingrese una descripción larga");
-            return false;
-        }
-        return true;
-    }
-
-    function validateUpdate() {
+    function validate() {
         $("#Product_ShortDescription_Error").text("");
         $("#Product_LongDescription_Error").text("");
         if(tinymce.get("Product_ShortDescription").getContent()=="")

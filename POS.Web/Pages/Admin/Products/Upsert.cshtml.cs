@@ -34,7 +34,7 @@ namespace POS.Web.Pages.Admin.Products
         }
         public IActionResult OnPost()
         {
-            Product.Image = getImageURL(Product.Image);
+            //Product.Image = getImageURL(Product.Image);
             if (Product.Id == 0)
                 _unitOfWork.Product.Add(Product);
             else
