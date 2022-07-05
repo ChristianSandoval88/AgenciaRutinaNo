@@ -21,7 +21,7 @@
                                 <div class="product-big-body">
                                     @if (product.IsActive)
                                     {
-                                        <h5 class="product-big-title"><a href="#">@product.Name</a></h5>
+                                        <h5 class="product-big-title"><a asp-page="Details" asp-route-id="@product.Id">@product.Name</a></h5>
                                         <div class="group-sm group-middle justify-content-start">
                                             <div class="product-big-rating"><span class="icon material-icons-stars"></span>&nbsp;<span class="product-big-reviews">@product.Category.Name</span>
                                         </div></div>
