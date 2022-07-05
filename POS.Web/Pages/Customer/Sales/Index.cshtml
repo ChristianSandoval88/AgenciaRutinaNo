@@ -23,8 +23,10 @@
                                     {
                                         <h5 class="product-big-title"><a asp-page="Details" asp-route-id="@product.Id">@product.Name</a></h5>
                                         <div class="group-sm group-middle justify-content-start">
-                                            <div class="product-big-rating"><span class="icon material-icons-stars"></span>&nbsp;<span class="product-big-reviews">@product.Category.Name</span>
-                                        </div></div>
+                                            <div class="product-big-rating">
+                                                <span class="icon material-icons-stars"></span>&nbsp;<span class="product-big-reviews">@product.Category.Name</span>
+                                            </div>
+                                        </div>
                                         <p class="product-big-text">@Html.Raw(product.ShortDescription)</p>
                                         <a class="button button-md button-default-outline-2 button-ujarak" asp-page="Details" asp-route-id="@product.Id">Más detalles</a>
                                         <div class="product-big-price-wrap">
