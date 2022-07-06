@@ -17,7 +17,7 @@
                 {
                     <article class="product-big mt-4">
                         <div class="unit flex-column flex-md-row align-items-md-stretch">
-                            <div class="unit-left"><img src="@product.Image" alt="" width="600" height="366" /></div>
+                            <div class="unit-left"><img src="@product.Image" width="600" height="366" style="object-fit: cover;" /></div>
                             <div class="unit-body">
                                 <div class="product-big-body">
                                     @if (product.IsActive)
@@ -53,4 +53,5 @@
         </div>
     </div>
 </section>
+<p id="fin"></p>
 <partial name="Front/_Footer" />

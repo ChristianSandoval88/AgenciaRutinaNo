@@ -4,7 +4,7 @@ $(document).ready(function () {
         "ajax": "/api/products",
         "order": [[0, "asc"]],
         "columns": [
-            { "data": "id", "visible": false },
+            { "data": "displayOrder" },
             { "data": "name" },
             { "data": "category.name" },
             { "data": "priceSell", "render": $.fn.dataTable.render.number(',', '.', 2, '') },

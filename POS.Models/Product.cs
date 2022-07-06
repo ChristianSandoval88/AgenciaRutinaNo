@@ -5,7 +5,11 @@ namespace POS.Models;
 public class Product
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; set; } 
+
+    [Display(Name = "Orden")]
+    [Range(0, 20, ErrorMessage = "El orden debe ser un valor númerico entre 0 y 20")]
+    public int DisplayOrder { get; set; } = 0;
 
     [Required(ErrorMessage = "El título es obligatorio")]
     [Display(Name = "Título")]

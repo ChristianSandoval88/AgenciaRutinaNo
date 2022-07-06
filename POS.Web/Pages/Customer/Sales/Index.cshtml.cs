@@ -15,7 +15,7 @@ namespace POS.Web.Pages.Customer.Sales
         }
         public void OnGet()
         {
-            ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").OrderBy(x => x.DisplayOrder);
             CategoryList = _unitOfWork.Category.GetAll();
         }
     }

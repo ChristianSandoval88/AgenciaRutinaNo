@@ -17,7 +17,7 @@ namespace POS.Web.Controllers
         }
         public IActionResult Index()
         {
-            var products = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            var products = _unitOfWork.Product.GetAll(includeProperties: "Category").OrderBy(x => x.DisplayOrder);
             return Json(new { data = products });
         }
         [HttpDelete("{id}")]
