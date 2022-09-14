@@ -54,3 +54,18 @@
     </div>
 </section>
 <partial name="Front/_Footer" />
+
+@section Scripts {
+    @if(TempData["mensaje"]!=null)
+    {   
+        <script src="~/lib/jquery-validation/dist/jquery.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+            icon: '@TempData["iconoMensaje"]',
+            title: '@TempData["tituloMensaje"]',
+            text: '@TempData["mensaje"]'
+            });
+        </script>
+    }
+}

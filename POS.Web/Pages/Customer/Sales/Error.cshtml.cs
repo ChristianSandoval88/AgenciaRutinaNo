@@ -5,8 +5,12 @@ namespace POS.Web.Pages.Customer.Sales
 {
     public class ErrorModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            TempData["iconoMensaje"] = "error";
+            TempData["tituloMensaje"] = "NO se realizo la compra";
+            TempData["mensaje"] = "La compra NO se pudo realizar! Intente mas tarde.";
+            return RedirectToPage("Index");
         }
     }
 }
