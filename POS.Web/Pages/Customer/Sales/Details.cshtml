@@ -16,43 +16,48 @@
 }
 else
 {
-    <section class="section section-sm bg-default text-left">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                    <h3>@Model.Product.Name</h3>
-                    @Html.Raw(Model.Product.LongDescription)
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <p>@Model.Product.PriceSellDesc?.ToString()</p>
-                    <span class="button button-md button-default-outline-2 mt-0 mb-3 buttonactive text-white">@Model.Product.PriceSell.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
-                    @if (Model.Product.PriceSell2 != null && Model.Product.PriceSell2 > 0)
-                    {
-                        <p>@Model.Product.PriceSell2Desc?.ToString()</p>
-                        <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell2?.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
-                    }
-                    @if (Model.Product.PriceSell3 != null && Model.Product.PriceSell3 > 0)
-                    {
-                        <p>@Model.Product.PriceSell3Desc?.ToString()</p>
-                        <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell3?.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
-                    }
-                    @if (Model.Product.PriceSell4 != null && Model.Product.PriceSell4 > 0)
-                    {
-                        <p>@Model.Product.PriceSell4Desc?.ToString()</p>
-                        <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell4?.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
-                    }
-                    <h6 class="mt-4">Cantidad:</h6><input type="number" min="1" max="20" value="1" id="qty" class="form-control" />
-                    <br />
-                    <div id="paypal-button-container"></div>
-                    <form method="post">
-                        <input type="hidden" asp-for="monto" class="monto" />
+    <form method="post">
+        <section class="section section-sm bg-default text-left">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <h3>@Model.Product.Name</h3>
+                        <input asp-for="Product.Name" type="hidden" />
+                        @Html.Raw(Model.Product.LongDescription)
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <p>@Model.Product.PriceSellDesc?.ToString()</p>
+                        <span class="button button-md button-default-outline-2 mt-0 mb-3 buttonactive text-white">@Model.Product.PriceSell.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
+                        @if (Model.Product.PriceSell2 != null && Model.Product.PriceSell2 > 0)
+                        {
+                            <p>@Model.Product.PriceSell2Desc?.ToString()</p>
+                            <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell2?.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
+                        }
+                        @if (Model.Product.PriceSell3 != null && Model.Product.PriceSell3 > 0)
+                        {
+                            <p>@Model.Product.PriceSell3Desc?.ToString()</p>
+                            <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell3?.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
+                        }
+                        @if (Model.Product.PriceSell4 != null && Model.Product.PriceSell4 > 0)
+                        {
+                            <p>@Model.Product.PriceSell4Desc?.ToString()</p>
+                            <span class="button button-md button-default-outline-2 mt-0 mb-3">@Model.Product.PriceSell4?.ToString("C",CultureInfo.CreateSpecificCulture("es-MX"))</span>
+                        }
+                        <h6 class="mt-4">Cantidad:</h6>
+                        <input type="hidden" asp-for="@Model.Payment.Price" class="form-control">
+                        <input asp-for="@Model.Payment.Qty" value="1" class="form-control">
+                        <span asp-validation-for="@Model.Payment.Qty" style="color:red;"></span>
+                        <br />
+                        <div id="paypal-button-container"></div>
+
                         <button id="kuesky" type="submit" class="button-md button-default-outline-2 button-ujarak">Pagar en quincenas</button>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <span style="visibility:hidden" id="price">@Model.Product.PriceSell</span>
+        </section>
+        <span style="visibility:hidden" id="price">@Model.Product.PriceSell</span>
+    </form>
+
 
 }
 <partial name="Front/_Footer" />
@@ -72,8 +77,9 @@ else
         }).render('#paypal-button-container');
 
         $("#kuesky").click(function() {
-            var monto = document.getElementById("price").textContent.replace(',', '').replace('$', '') * document.getElementById("qty").value;
-            document.getElementById("monto").value = monto;
+            var price = document.getElementById("price").textContent.replace(',', '').replace('$', '');
+            document.getElementById("price").value = price;
+            document.getElementById("Payment_Price").value = price;
         });
 
         $(".button").click(function() {
@@ -83,5 +89,8 @@ else
             $(this).addClass("text-white");
             $('#price').text($(this).text());
         });
+
+        
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }

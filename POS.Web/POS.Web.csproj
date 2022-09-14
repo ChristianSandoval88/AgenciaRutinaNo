@@ -33,4 +33,10 @@
     <Folder Include="wwwroot\Front\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Customer\Sales\Error.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

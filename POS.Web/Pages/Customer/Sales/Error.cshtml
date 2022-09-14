@@ -1,0 +1,13 @@
+﻿@page
+@model POS.Web.Pages.Customer.Sales.ErrorModel
+@{
+    Layout = "~/Pages/Shared/Front/_Layout.cshtml";
+}
+<partial name="Front/_Menu" />
+<section class="section section-sm bg-default text-left">
+    <div class="container">
+        <h3 style="color: red;">La compra NO se pudo realizar! Intente más tarde</h3>
+        <a asp-page="Index" class="button button-md button-default-outline-2 button-ujarak">Regresar al inicio</a>
+    </div>
+</section>
+<partial name="Front/_Footer" />

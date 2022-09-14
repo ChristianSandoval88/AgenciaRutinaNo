@@ -9,11 +9,16 @@ namespace POS.Web.Controllers;
 [ApiController]
 public class KueskyController : Controller
 {
-    private static readonly HttpClient client = new HttpClient();
+    private readonly IConfiguration configuration;
+
+    public KueskyController(IConfiguration configuration)
+    {
+        this.configuration = configuration;
+    }
     [HttpPost]
     public IActionResult Post([FromBody] KueskyResponse request)
     {
-        Response.Headers.Add("Authorization", "Bearer ec3c1eb4-e22c-4e86-af87-feac42a78113");
+        Response.Headers.Add("Authorization", $"Bearer { configuration["API_SECRET"] }");
         if (request != null)
         {
             var requestStatus = "accept";
