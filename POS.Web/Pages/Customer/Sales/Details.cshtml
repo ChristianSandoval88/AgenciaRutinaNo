@@ -18,7 +18,6 @@ else
 {
     <section class="section section-sm bg-default text-left">
         <div class="container">
-            <a asp-page="Index" class="button button-md button-default-outline-2 button-ujarak">Regresar al inicio</a>
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <h3>@Model.Product.Name</h3>
@@ -45,11 +44,16 @@ else
                     <h6 class="mt-4">Cantidad:</h6><input type="number" min="1" max="20" value="1" id="qty" class="form-control" />
                     <br />
                     <div id="paypal-button-container"></div>
+                    <form method="post">
+                        <input type="hidden" asp-for="monto" class="monto" />
+                        <button id="kuesky" type="submit" class="button-md button-default-outline-2 button-ujarak">Pagar en quincenas</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
     <span style="visibility:hidden" id="price">@Model.Product.PriceSell</span>
+
 }
 <partial name="Front/_Footer" />
 @section Scripts{
@@ -66,6 +70,11 @@ else
                 });
             }
         }).render('#paypal-button-container');
+
+        $("#kuesky").click(function() {
+            var monto = document.getElementById("price").textContent.replace(',', '').replace('$', '') * document.getElementById("qty").value;
+            document.getElementById("monto").value = monto;
+        });
 
         $(".button").click(function() {
             $(".button").removeClass("buttonactive");
