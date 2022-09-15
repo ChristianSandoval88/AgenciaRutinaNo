@@ -107,7 +107,7 @@ public class ResponseData
 public class PaymentModel
 {
     [Required(ErrorMessage = "Campo requerido")]
-    [Range(1, 9, ErrorMessage = "El orden debe ser un valor númerico entre 1 y 9")]
+    [Range(1, 9, ErrorMessage = "La cantidad debe ser un valor numerico entre 1 y 9")]
     public int Qty { get; set; } = 1;
 
     public decimal Price { get; set; }

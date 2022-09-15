@@ -9,7 +9,7 @@ namespace POS.Web.Pages.Customer.Sales
         {
             TempData["iconoMensaje"] = "success";
             TempData["tituloMensaje"] = "Gracias por su compra";
-            TempData["mensaje"] = "La compra se realizó correctamente, gracias!";
+            TempData["mensaje"] = "La compra se realizo correctamente, gracias!";
             return RedirectToPage("Index");
         }
     }
