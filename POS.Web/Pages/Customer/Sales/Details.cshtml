@@ -47,10 +47,14 @@ else
                         <input type="hidden" asp-for="@Model.Payment.Price" class="form-control">
                         <input asp-for="@Model.Payment.Qty" value="1" class="form-control">
                         <span asp-validation-for="@Model.Payment.Qty" style="color:red;"></span>
+                        Paga en quincenas con KueskyPay
+                        <button id="kuesky" type="submit">
+                            <img src="https://assets-global.website-files.com/614d688b383096276930acef/614d72d1a76dceb62964c67e_Logo.png" alt="KueskiPay Logo" class="logo-image">
+                        </button>
+                        <br />
+                        <hr />
                         <br />
                         <div id="paypal-button-container"></div>
-
-                        <button id="kuesky" type="submit" class="button-md button-default-outline-2 button-ujarak">Pagar en quincenas</button>
                     </div>
                 </div>
             </div>
@@ -69,10 +73,18 @@ else
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: document.getElementById("price").textContent.replace(',', '').replace('$', '') * document.getElementById("qty").value
+                            value: document.getElementById("price").textContent.replace(',', '').replace('$', '') * document.getElementById("Payment_Qty").value
                         },
                     }]
                 });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    location.href = 'Success';
+                });
+            },
+            onCancel: function(data) {
+                location.href = 'Error';
             }
         }).render('#paypal-button-container');
 
@@ -90,7 +102,7 @@ else
             $('#price').text($(this).text());
         });
 
-        
+
     </script>
     <partial name="_ValidationScriptsPartial" />
 }

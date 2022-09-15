@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using POS.Data;
+using POS.Data.Repository.IRepository;
 using POS.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -9,18 +11,23 @@ namespace POS.Web.Controllers;
 [ApiController]
 public class KueskyController : Controller
 {
+    private readonly IUnitOfWork dbContext;
     private readonly IConfiguration configuration;
 
-    public KueskyController(IConfiguration configuration)
+    public KueskyController(IUnitOfWork dbContext, IConfiguration configuration)
     {
+        this.dbContext = dbContext;
         this.configuration = configuration;
     }
     [HttpPost]
     public IActionResult Post([FromBody] KueskyResponse request)
     {
-        Response.Headers.Add("Authorization", $"Bearer { configuration["API_SECRET"] }");
+        Response.Headers.Add("Authorization", $"Bearer {configuration["API_SECRET"]}");
         if (request != null)
         {
+            var purchase = new Purchase() { payment_id = request.payment_id, amount = request.amount, DateTime = DateTime.UtcNow };
+            dbContext.Purchase.Add(purchase);
+            dbContext.Save();
             var requestStatus = "accept";
             if (request.status != "approved") requestStatus = "ok";
 
