@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using POS.Data;
 using POS.Data.Repository.IRepository;
 using POS.Models;
@@ -13,17 +14,19 @@ public class KueskyController : Controller
 {
     private readonly IUnitOfWork dbContext;
     private readonly IConfiguration configuration;
+    private readonly ILogger logger;
 
-    public KueskyController(IUnitOfWork dbContext, IConfiguration configuration)
+    public KueskyController(IUnitOfWork dbContext, IConfiguration configuration, ILogger logger)
     {
         this.dbContext = dbContext;
         this.configuration = configuration;
+        this.logger = logger;
     }
     [HttpPost]
     public IActionResult Post([FromBody] KueskyResponse request)
     {
-        Console.WriteLine("Data suculenta:");
-        Console.WriteLine(request);
+        logger.LogInformation("Data suculenta:");
+        logger.LogInformation(request.ToString());
 
         Response.Headers.Add("Authorization", $"Bearer {configuration["API_SECRET"]}");
         if (request != null)
