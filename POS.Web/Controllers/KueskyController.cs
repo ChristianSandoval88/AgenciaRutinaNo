@@ -22,6 +22,9 @@ public class KueskyController : Controller
     [HttpPost]
     public IActionResult Post([FromBody] KueskyResponse request)
     {
+        Console.WriteLine("Data suculenta:");
+        Console.WriteLine(request);
+
         Response.Headers.Add("Authorization", $"Bearer {configuration["API_SECRET"]}");
         if (request != null)
         {
