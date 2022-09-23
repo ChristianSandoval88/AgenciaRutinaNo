@@ -37,7 +37,7 @@ public class KueskyController : Controller
             var requestStatus = "accept";
             if (request.status != "approved") requestStatus = "ok";
 
-            logger.LogInformation(requestStatus);
+            logger.LogInformation(requestStatus); 
             return Json(new { status = requestStatus });
         }
         return Json(new { status = "ok" });
