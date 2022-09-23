@@ -10,7 +10,7 @@ namespace POS.Models
     {
         public string payment_id { get; set; }
         public string order_id { get; set; }
-        public int amount { get; set; }
+        public decimal amount { get; set; }
         public string status { get; set; }
         public string status_reason { get; set; }
         public bool sandbox { get; set; }
