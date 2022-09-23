@@ -16,7 +16,7 @@ public class KueskyController : Controller
     private readonly IConfiguration configuration;
     private readonly ILogger logger;
 
-    public KueskyController(IUnitOfWork dbContext, IConfiguration configuration, ILogger logger)
+    public KueskyController(IUnitOfWork dbContext, IConfiguration configuration, ILogger<KueskyController> logger)
     {
         this.dbContext = dbContext;
         this.configuration = configuration;
