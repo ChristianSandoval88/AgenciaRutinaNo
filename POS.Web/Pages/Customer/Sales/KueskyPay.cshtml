@@ -1,0 +1,140 @@
+﻿@page
+@using System.Globalization
+@model POS.Web.Pages.Customer.Sales.KueskyPayModel
+@{
+    Layout = "~/Pages/Shared/Front/_Layout.cshtml";
+}
+<partial name="Front/_Menu" />
+@if (Model.Payment == null)
+{
+    <section class="section section-sm bg-default text-left">
+        <div class="container">
+            <h3>No se encontró la página solicitada</h3>
+            <a asp-page="Index" class="button button-md button-default-outline-2 button-ujarak">Regresar al inicio</a>
+        </div>
+    </section>
+}
+else if (TempData["FueraDeLimite"] != null)
+{
+    <section class="section section-sm bg-default text-left">
+        <div class="container">
+            <h3>@TempData["FueraDeLimite"]</h3>
+            <a asp-page="Index" class="button button-md button-default-outline-2 button-ujarak">Regresar al inicio</a>
+        </div>
+    </section>
+}
+else
+{
+    <form method="post">
+        <section class="section section-sm bg-default text-left">
+            <div class="container">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <h3>@Model.Payment.ProductName</h3>
+                        <input asp-for="@Model.Payment.ProductName" type="hidden" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3">
+                        @if (Model.Payment.Qty == 1)
+                        {
+                            <h6 class="text-danger">@(
+                             (Model.Payment.Qty * Model.Payment.Price).ToString("C", CultureInfo.CreateSpecificCulture("es-MX"))
+                             )</h6>
+                        }
+                        else
+                        {
+                            <h6 class="text-danger">@Model.Payment.Qty X @Model.Payment.Price = 
+                                @(
+                                    (Model.Payment.Qty * Model.Payment.Price).ToString("C", CultureInfo.CreateSpecificCulture("es-MX"))
+                                    )
+                            </h6>
+                        }
+
+                        <input asp-for="@Model.Payment.Qty" type="hidden" />
+                        <input asp-for="@Model.Payment.Price" type="hidden" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label asp-for="Form.Name"></label>
+                                <input asp-for="Form.Name" class="form-control" />
+                                <span asp-validation-for="Form.Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label asp-for="Form.LastName"></label>
+                                <input asp-for="Form.LastName" class="form-control" />
+                                <span asp-validation-for="Form.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <label asp-for="Form.Col"></label>
+                                <input asp-for="Form.Col" class="form-control" />
+                                <span asp-validation-for="Form.Col" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <label asp-for="Form.Address"></label>
+                                <input asp-for="Form.Address" class="form-control" />
+                                <span asp-validation-for="Form.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3">
+                                <label asp-for="Form.ZipCode"></label>
+                                <input asp-for="Form.ZipCode" class="form-control" />
+                                <span asp-validation-for="Form.ZipCode" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label asp-for="Form.City"></label>
+                                <input asp-for="Form.City" class="form-control" />
+                                <span asp-validation-for="Form.City" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="Form.State"></label>
+                                <input asp-for="Form.State" class="form-control" />
+                                <span asp-validation-for="Form.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label asp-for="Form.Phone"></label>
+                                <input asp-for="Form.Phone" class="form-control" />
+                                <span asp-validation-for="Form.Phone" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label asp-for="Form.Email"></label>
+                                <input asp-for="Form.Email" class="form-control" />
+                                <span asp-validation-for="Form.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row  mt-2">
+                            <div class="col-3">
+                                <input class="button button-md button-default-outline-2 button-ujarak" type="submit" value="Enviar"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+}
+<partial name="Front/_Footer" />
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+}

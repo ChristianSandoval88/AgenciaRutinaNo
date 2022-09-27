@@ -111,6 +111,10 @@ body {
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
+.text-danger {
+color:red;
+}
+
 h1, h2, h3, h4, h5, h6, [class*='heading-'] {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -11813,7 +11817,7 @@ h4 + .instafeed {
 }
 
 .row + .row {
-	margin-top: 35px;
+	margin-top: 0px;
 }
 
 .row + .button-wrap {
@@ -11825,7 +11829,7 @@ h4 + .instafeed {
 		margin-top: 60px;
 	}
 	.row + .row {
-		margin-top: 60px;
+		margin-top: 20px;
 	}
 }
 

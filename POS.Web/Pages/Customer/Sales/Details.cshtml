@@ -23,6 +23,7 @@ else
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                         <h3>@Model.Product.Name</h3>
                         <input asp-for="Product.Name" type="hidden" />
+                        <input asp-for="Payment.ProductName" type="hidden" />
                         @Html.Raw(Model.Product.LongDescription)
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -50,7 +51,7 @@ else
                         <br />
                         Paga en quincenas con KueskyPay
                         <button id="kuesky" type="submit">
-                            <img src="https://assets-global.website-files.com/614d688b383096276930acef/614d72d1a76dceb62964c67e_Logo.png" alt="KueskiPay Logo" class="logo-image">
+                            <img src="https://assets-global.website-files.com/614d688b383096276930acef/614d72d1a76dceb62964c67e_Logo.png" alt="KueskiPay Logo" class="logo-image" style="cursor:pointer;">
                         </button>
                         <br />
                         <hr />

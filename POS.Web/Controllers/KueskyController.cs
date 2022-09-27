@@ -25,13 +25,13 @@ public class KueskyController : Controller
     [HttpPost]
     public IActionResult Post([FromBody] KueskyResponse request)
     {
-        logger.LogInformation("Data suculenta:");
+        logger.LogInformation("*** LOG ***");
         logger.LogInformation(request.ToString());
 
         Response.Headers.Add("Authorization", $"Bearer {configuration["API_SECRET"]}");
         if (request != null)
         {
-            var purchase = new Purchase() { payment_id = request.payment_id, amount = request.amount, DateTime = DateTime.UtcNow };
+            var purchase = new Purchase() { payment_id = request.order_id, amount = request.amount, DateTime = DateTime.UtcNow };
             dbContext.Purchase.Add(purchase);
             dbContext.Save();
             var requestStatus = "accept";
