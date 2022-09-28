@@ -50,23 +50,23 @@ public class KueskyPayModel : PageModel
             order_id = $"Orden {order}",
             description = "Viajes RutinaNo",
             amount = new() { total = Payment.Price * Payment.Qty, currency = "MXN", details = new() { subtotal= Payment.Price * Payment.Qty , shipping=0.0m, tax=0.0m } },
-            items = new Items[] {
-                new() { name = Payment.ProductName, description = Payment.ProductName, quantity = Payment.Qty, price = Payment.Price, currency = "MXN", sku = "001" }
-            },
-            shipping = new()
-            {
-                name = new() { name = Form.Name, last = Form.LastName },
-                address = new() { address = Form.Address.Trim(), neighborhood = Form.Col, city = Form.City.Trim(), state = "Jalisco", zipcode = Form.ZipCode, country = "MX" },
-                phone_number = Form.Phone.Trim(),
-                email = Form.Email.Trim()
-            },
-            billing = new()
-            {
-                business = new() { name = "RutinaNo", rfc = "MOAV8804282U1" },
-                address = new() { address = "Nicolas Romero 906", interior = "A", neighborhood = "Mezquitan Country", city = "Guadalajara", state = "Jalisco", zipcode = "44260", country = "MX" },
-                phone_number = "3321783834",
-                email = "rutinano@hotmail.com"
-            },
+            //items = new Items[] {
+            //    new() { name = Payment.ProductName, description = Payment.ProductName, quantity = Payment.Qty, price = Payment.Price, currency = "MXN", sku = "001" }
+            //},
+            //shipping = new()
+            //{
+            //    name = new() { name = Form.Name, last = Form.LastName },
+            //    address = new() { address = Form.Address.Trim(), neighborhood = Form.Col, city = Form.City.Trim(), state = "Jalisco", zipcode = Form.ZipCode, country = "MX" },
+            //    phone_number = Form.Phone.Trim(),
+            //    email = Form.Email.Trim()
+            //},
+            //billing = new()
+            //{
+            //    business = new() { name = "RutinaNo", rfc = "MOAV8804282U1" },
+            //    address = new() { address = "Nicolas Romero 906", interior = "A", neighborhood = "Mezquitan Country", city = "Guadalajara", state = "Jalisco", zipcode = "44260", country = "MX" },
+            //    phone_number = "3321783834",
+            //    email = "rutinano@hotmail.com"
+            //},
             callbacks = new()
             {
                 on_success = "https://rutinano.herokuapp.com/Customer/Sales/Success",
@@ -98,10 +98,10 @@ public class Order
     public string order_id { get; set; }
     public string description { get; set; }
     public Amount amount { get; set; }
-    public Items[] items { get; set; }
+    //public Items[] items { get; set; }
     public Callbacks callbacks { get; set; }
-    public Shipping shipping { get; set; }
-    public Billing billing { get; set; }
+    //public Shipping shipping { get; set; }
+    //public Billing billing { get; set; }
 }
 public class Details
 {
