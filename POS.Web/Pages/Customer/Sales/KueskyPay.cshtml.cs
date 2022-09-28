@@ -48,11 +48,11 @@ public class KueskyPayModel : PageModel
         Order data = new Order
         {
             order_id = $"Orden {order}",
-            description = "Viajes RutinaNo!",
+            description = "Viajes RutinaNo",
             amount = new() { total = Payment.Price * Payment.Qty, currency = "MXN", details = new() { subtotal= Payment.Price * Payment.Qty , shipping=0.0m, tax=0.0m } },
-            items = new Items[] {
-                new() { name = Payment.ProductName, description = Payment.ProductName, quantity = Payment.Qty, price = Payment.Price, currency = "MXN", sku = "001" }
-            },
+            //items = new Items[] {
+            //    new() { name = Payment.ProductName, description = Payment.ProductName, quantity = Payment.Qty, price = Payment.Price, currency = "MXN", sku = "001" }
+            //},
             shipping = new()
             {
                 name = new() { name = Form.Name, last = Form.LastName },
