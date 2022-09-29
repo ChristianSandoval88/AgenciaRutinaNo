@@ -23,19 +23,19 @@ public class KueskyController : Controller
         this.logger = logger;
     }
     [HttpPost]
-    public IActionResult Post([FromBody] KueskyResponse request)
+    public IActionResult Post([FromBody] KueskyResponse response)
     {
         logger.LogInformation("*** LOG ***");
-        logger.LogInformation(request.ToString());
+        logger.LogInformation(response.ToString());
 
         Response.Headers.Add("Authorization", $"Bearer {configuration["API_SECRET"]}");
-        if (request != null)
+        if (response != null)
         {
-            var purchase = new Purchase() { payment_id = request.payment_id, amount = request.amount, DateTime = DateTime.UtcNow };
+            var purchase = new Purchase() { payment_id = response.payment_id, amount = response.amount, DateTime = DateTime.UtcNow };
             dbContext.Purchase.Add(purchase);
             dbContext.Save();
             var requestStatus = "accept";
-            if (request.status != "approved") requestStatus = "ok";
+            if (response.status != "approved") requestStatus = "ok";
 
             logger.LogInformation(requestStatus); 
             return Json(new { status = requestStatus });
