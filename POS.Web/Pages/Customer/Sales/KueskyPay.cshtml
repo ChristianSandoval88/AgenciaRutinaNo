@@ -44,7 +44,7 @@ else
                         }
                         else
                         {
-                            <h6 class="text-danger">@Model.Payment.Qty X @Model.Payment.Price = 
+                            <h6 class="text-danger">@Model.Payment.Qty X @Model.Payment.Price.ToString("C", CultureInfo.CreateSpecificCulture("es-MX")) = 
                                 @(
                                     (Model.Payment.Qty * Model.Payment.Price).ToString("C", CultureInfo.CreateSpecificCulture("es-MX"))
                                     )

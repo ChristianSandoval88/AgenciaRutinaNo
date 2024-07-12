@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using NuGet.Protocol;
 using POS.Data.Repository.IRepository;
 using POS.Models;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Globalization;
-using System.Linq.Expressions;
 using System.Net.Http.Headers;
 
 namespace POS.Web.Pages.Customer.Sales;
@@ -34,10 +30,10 @@ public class KueskyPayModel : PageModel
         if (_Payment == null)
             return RedirectToPage("Index");
 
-        var total = _Payment.Qty * _Payment.Price;
+        /*var total = _Payment.Qty * _Payment.Price;
         if (total < 300 || total > 5000)
             TempData["FueraDeLimite"] = $"El monto {total.ToString("C", CultureInfo.CreateSpecificCulture("es-MX"))} está fuera de los límites de crédito.";
-
+        */
         Payment = _Payment;
         return Page();
     }

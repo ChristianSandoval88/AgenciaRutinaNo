@@ -25,9 +25,6 @@ public class KueskyController : Controller
     [HttpPost]
     public IActionResult Post([FromBody] KueskyResponse response)
     {
-        logger.LogInformation("*** LOG ***");
-        logger.LogInformation(response.ToString());
-
         Response.Headers.Add("Authorization", $"Bearer {configuration["API_SECRET"]}");
         if (response != null)
         {
