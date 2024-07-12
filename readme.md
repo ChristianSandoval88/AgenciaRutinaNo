@@ -1,1 +1,1 @@
-hello
+E-Commerce para RutinaNo! Agencia de Viajes, incluye sistema de administración para la agencia e integración de pagos con Paypal y Kueski Pay
